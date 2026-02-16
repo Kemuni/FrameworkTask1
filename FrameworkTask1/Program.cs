@@ -26,9 +26,16 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 
-app.MapGet("/api/perfumes", (PerfumeStore store) =>
+app.MapGet("/api/perfumes", (
+    PerfumeStore store,
+    string? name,
+    string? brand,
+    decimal? minPrice,
+    decimal? maxPrice,
+    string? sortBy,
+    string? sortOrder) =>
 {
-    var perfumes = store.GetAll();
+    var perfumes = store.GetAll(name, brand, minPrice, maxPrice, sortBy, sortOrder);
     return Results.Ok(perfumes);
 });
 
@@ -50,11 +57,26 @@ app.MapPost("/api/perfumes", (CreatePerfumeRequest request, PerfumeStore store, 
     if (string.IsNullOrWhiteSpace(request.Name))
         throw new ValidationException("Название парфюма не может быть пустым.");
 
+    if (request.Name.Length > 200)
+        throw new ValidationException("Название парфюма не может превышать 200 символов.");
+
+    if (string.IsNullOrWhiteSpace(request.Brand))
+        throw new ValidationException("Бренд не может быть пустым.");
+
+    if (request.Brand.Length > 200)
+        throw new ValidationException("Название бренда не может превышать 200 символов.");
+
     if (request.Price <= 0)
         throw new ValidationException("Цена должна быть больше 0.");
-    
+
+    if (request.Price > 10_000_000)
+        throw new ValidationException("Цена не может превышать 10 000 000.");
+
     if (request.VolumeInMl <= 0)
-        throw new ValidationException("Объем в мл должен быть больше 0.");
+        throw new ValidationException("Объём в мл должен быть больше 0.");
+
+    if (request.VolumeInMl > 10_000)
+        throw new ValidationException("Объём не может превышать 10 000 мл.");
 
     var perfume = store.Add(request);
     return Results.Created($"/api/perfumes/{perfume.Id}", perfume);
