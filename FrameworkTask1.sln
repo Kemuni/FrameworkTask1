@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameworkTask1", "FrameworkTask1\FrameworkTask1.csproj", "{B900031F-A9D2-4D67-87E1-E28DD3321DFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B900031F-A9D2-4D67-87E1-E28DD3321DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B900031F-A9D2-4D67-87E1-E28DD3321DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B900031F-A9D2-4D67-87E1-E28DD3321DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B900031F-A9D2-4D67-87E1-E28DD3321DFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
